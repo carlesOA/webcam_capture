@@ -48,14 +48,26 @@ int main(int argc, char *argv[])
             std::cout << "No frame" << std::endl;
             cv::waitKey();
         }
-        
-        //show image in a window
-        cv::imshow("Output Window", image);
-		
-		//print image dimensions
-		std::cout << "image size is: " << image.rows << "x" << image.cols << std::endl; 
-		
-		//Waits 1 millisecond to check if a key has been pressed. If so, breaks the loop. Otherwise continues.
+       
+      // change the 16 neigbors of the central pixel to the color black
+	for(int x =318; x < 322; x++){
+		for(int y = 238; y < 242; y ++){
+			image.at<cv::Vec3b>(y,x)[0] = 0;  
+			image.at<cv::Vec3b>(y,x)[1] = 0;  
+			image.at<cv::Vec3b>(y,x)[2] = 0;  
+		} 
+	}
+
+	//show image in a window
+	cv::imshow("Output Window", image);
+
+	//print image dimensions
+		std::cout << "image size is: " << image.rows << "x" << image.cols << std::endl;
+
+	//print the central pixel
+		std::cout <<"the value of the central pixel is:" << (image.rows/2) << ":" << (image.cols/2) << std::endl;
+	
+	//Waits 1 millisecond to check if a key has been pressed. If so, breaks the loop. Otherwise continues.
         if(cv::waitKey(1) >= 0) break;
     }   
 }
